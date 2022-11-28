@@ -5,6 +5,8 @@ __all__ = (
     "PreconditionError",
     "PreconditionContext",
     "precondition",
+    "SimpleTestCase",
+    "TransactionTestCase",
     "TestCase",
 )
 
@@ -13,7 +15,9 @@ import functools
 from typing import TYPE_CHECKING
 
 from django.db import transaction
+from django.test import SimpleTestCase as DjangoSimpleTestCase
 from django.test import TestCase as DjangoTestCase
+from django.test import TransactionTestCase as DjangoTransactionTestCase
 
 
 if TYPE_CHECKING:
@@ -78,9 +82,7 @@ def precondition(func):
     return wrapper
 
 
-class TestCase(DjangoTestCase):
-    """Extends the django TestCase class with a precondition failure status."""
-
+class TestCaseMixin:
     preconditionFailureException = PreconditionError
 
     def _feedErrorsToResult(self, result, errors):
@@ -89,7 +91,7 @@ class TestCase(DjangoTestCase):
                 result.addSubTest(test.test_case, test, exc_info)
             elif exc_info is not None:
                 if issubclass(exc_info[0], (self.failureException, self.preconditionFailureException)):
-                    if getattr(exc_info[0], '__precondition_failure__', None):
+                    if getattr(exc_info[1], '__precondition_failure__', None):
                         result.addPreconditionFailure(test, exc_info)
                     else:
                         result.addFailure(test, exc_info)
@@ -154,3 +156,28 @@ class TestCase(DjangoTestCase):
         except unexpected_exception as e:
             standard_msg = f"Unexpected {e.__class__.__name__} raised: {e!r}"
             raise self.fail(self._formatMessage(msg, standard_msg))
+
+
+class SimpleTestCase(TestCaseMixin, DjangoSimpleTestCase):
+    """Extends the django
+    `SimpleTestCase <https://docs.djangoproject.com/en/4.1/topics/testing/tools/#django.test.SimpleTestCase>`_
+    class with a precondition failure status.
+    """
+
+
+class TransactionTestCase(TestCaseMixin, DjangoTransactionTestCase):
+    """Extends the django
+    `TransactionTestCase <https://docs.djangoproject.com/en/4.1/topics/testing/tools/#django.test.TransactionTestCase>`_
+    class with a precondition failure status.
+
+    .. seealso:: :class:`SimpleTestCase`
+    """
+
+
+class TestCase(TestCaseMixin, DjangoTestCase):
+    """Extends the django
+    `TestCase <https://docs.djangoproject.com/en/4.1/topics/testing/tools/#testcase>`_
+    class with a precondition failure status.
+
+    .. seealso:: :class:`SimpleTestCase`
+    """

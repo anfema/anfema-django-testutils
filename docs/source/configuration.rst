@@ -47,7 +47,7 @@ The :mod:`anfema_django_testutils` provides some options that can be set in your
 
 .. option:: TEST_REPORT_CSS
 
-    A string which defines the CSS file to be used by the test test report generator.
+    A string which defines the CSS file to be used by the test report generator.
 
     | Default is :code:`"test-results.css"`.
 

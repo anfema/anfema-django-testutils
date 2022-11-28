@@ -50,3 +50,5 @@ autodoc_member_order = 'bysource'
 
 copybutton_prompt_text = r'>>> |\.\.\. |\$ |In \[\d*\]: | {2,5}\.\.\.: | {5,8}: '
 copybutton_prompt_is_regexp = True
+
+autodoc_mock_imports = ["django"]
