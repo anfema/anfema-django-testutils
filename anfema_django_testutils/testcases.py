@@ -144,25 +144,19 @@ class TestCaseMixin:
 
 
 class SimpleTestCase(TestCaseMixin, DjangoSimpleTestCase):
-    """Extends the django
-    `SimpleTestCase <https://docs.djangoproject.com/en/4.1/topics/testing/tools/#django.test.SimpleTestCase>`_
-    class with a precondition failure status.
+    """Extends the :class:`django.test.SimpleTestCase` class with a precondition failure status.
     """
 
 
 class TransactionTestCase(TestCaseMixin, DjangoTransactionTestCase):
-    """Extends the django
-    `TransactionTestCase <https://docs.djangoproject.com/en/4.1/topics/testing/tools/#django.test.TransactionTestCase>`_
-    class with a precondition failure status.
+    """Extends the :class:`django.test.TransactionTestCase` class with a precondition failure status.
 
     .. seealso:: :class:`SimpleTestCase`
     """
 
 
 class TestCase(TestCaseMixin, DjangoTestCase):
-    """Extends the django
-    `TestCase <https://docs.djangoproject.com/en/4.1/topics/testing/tools/#testcase>`_
-    class with a precondition failure status.
+    """Extends the :class:`django.test.TestCase` class with a precondition failure status.
 
     .. seealso:: :class:`SimpleTestCase`
     """

@@ -28,6 +28,7 @@ extensions = [
     'sphinx_copybutton',
     'sphinx.ext.autodoc',
     'sphinx_autodoc_typehints',
+    'sphinx.ext.intersphinx',
     'm2r2',
 ]
 
@@ -52,3 +53,8 @@ copybutton_prompt_text = r'>>> |\.\.\. |\$ |In \[\d*\]: | {2,5}\.\.\.: | {5,8}: 
 copybutton_prompt_is_regexp = True
 
 autodoc_mock_imports = ["django"]
+
+intersphinx_mapping = {
+    'python': ('https://docs.python.org/3', None),
+    'django': ('https://docs.djangoproject.com/en/stable/', 'https://docs.djangoproject.com/en/stable/_objects/'),
+}
