@@ -23,8 +23,6 @@ from django.test import TransactionTestCase as DjangoTransactionTestCase
 if TYPE_CHECKING:
     from typing import Iterator
 
-from unittest.case import _SubTest
-
 
 class PreconditionError(AssertionError):
     """Exception to indicate a precondition failure."""
@@ -84,19 +82,6 @@ def precondition(func):
 
 class TestCaseMixin:
     preconditionFailureException = PreconditionError
-
-    def _feedErrorsToResult(self, result, errors):
-        for test, exc_info in errors:
-            if isinstance(test, _SubTest):
-                result.addSubTest(test.test_case, test, exc_info)
-            elif exc_info is not None:
-                if issubclass(exc_info[0], (self.failureException, self.preconditionFailureException)):
-                    if getattr(exc_info[1], '__precondition_failure__', None):
-                        result.addPreconditionFailure(test, exc_info)
-                    else:
-                        result.addFailure(test, exc_info)
-                else:
-                    result.addError(test, exc_info)
 
     @precondition
     def _callSetUp(self):

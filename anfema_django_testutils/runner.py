@@ -228,8 +228,11 @@ class HtmlTestResult(TestResult):
 
     def addFailure(self, test: unittest.case.TestCase, err: _SysExcInfoType) -> None:
         """Called when an error has occurred."""
-        super().addFailure(test, err)
-        self._add_test_result_data(test, 'failure', self._exc_info_to_string(err, test))
+        if getattr(err[1], '__precondition_failure__', None):
+            self.addPreconditionFailure(test, err)
+        else:
+            super().addFailure(test, err)
+            self._add_test_result_data(test, 'failure', self._exc_info_to_string(err, test))
 
     def addExpectedFailure(self, test: unittest.case.TestCase, err: _SysExcInfoType) -> None:
         """Called when an expected failure/error occurred."""
@@ -238,7 +241,6 @@ class HtmlTestResult(TestResult):
 
     def addError(self, test: unittest.case.TestCase, err: _SysExcInfoType) -> None:
         """Called when an error has occurred."""
-
         if getattr(err[1], '__precondition_failure__', None):
             self.addPreconditionFailure(test, err)
         else:
