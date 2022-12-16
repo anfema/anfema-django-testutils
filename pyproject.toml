@@ -1,0 +1,58 @@
+[build-system]
+requires = ["flit_core >=3.4,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "anfema-django-testutils"
+description = "Testrunner for django which covers html report and code coverage"
+readme = "README.md"
+keywords = [
+    "django",
+    "tests",
+    "coverage",
+    "testrunner",
+]
+license = {file = "LICENSE"}
+classifiers = [
+    "Framework :: Django",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+]
+requires-python = ">=3.9"
+dynamic = ["version"]
+dependencies = [
+    "django-mathfilters",
+    "coverage[toml]",
+    "snapshottest",
+]
+
+[tool.setuptools.package-data]
+anfema_django_testutils = ["templates/**", "static/**"]
+
+[project.optional-dependencies]
+dev = [
+    "black",
+    "isort",
+]
+docs = [
+    "sphinx~=5.1",
+    "sphinx-autodoc-typehints",
+    "sphinx_rtd_theme",
+    "sphinx-copybutton",
+    "m2r2",
+]
+
+[project.urls]
+Source = "https://github.com/anfema/anfema-django-testutils"
+
+[tool.black]
+line-length = 120
+skip-string-normalization = true
+
+[tool.isort]
+line_length = 120
+profile = "black"
+known_django = "django"
+sections = ["FUTURE", "STDLIB", "DJANGO", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
+lines_after_imports = 2

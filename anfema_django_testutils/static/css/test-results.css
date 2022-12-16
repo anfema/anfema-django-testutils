@@ -1,0 +1,214 @@
+
+.container {
+    text-align: left;
+    margin: 5pt;
+}
+
+.div-summary {
+    text-align: left;
+    margin: 5pt;
+}
+
+table.table-summary {
+    background: none;
+    width: 20%;
+}
+table.table-summary th {
+    background: none;
+}
+table.table-summary tr {
+    background: none;
+}
+
+.table-testclass {
+    width: 100%;
+    margin-top: 5pt;
+    border-style: double;
+    border-color: black;
+}
+
+.table-testclass tbody {
+    display: none;
+    /*width: 80%;*/
+}
+
+
+.col-class-name {
+    width: 80%;
+    text-align: left;
+}
+
+.col-duration {
+    width: 7%;
+    border-color: black;
+    text-align: center;
+}
+
+.col-result {
+    width: 10%;
+    text-align: center;
+}
+
+.col-button {
+    width: 3%;
+    alignment: center;
+}
+
+th {
+    background: #9cdcfe;
+    height: 20pt;
+    font-size: larger;
+}
+
+.tr--passed {
+    background: lightgreen;
+    text-align: center;
+    height: 25pt;
+}
+
+.tr--failure {
+    background: #f5c0a9;
+    text-align: center;
+    height: 25pt;
+}
+
+.tr--error {
+    background: lightcoral;
+    text-align: center;
+    height: 25pt;
+}
+
+.tr--skipped {
+    background: lightgrey;
+    text-align: center;
+    height: 25pt;
+}
+
+.tr--precondition_failure {
+    background: #f5c0a9;
+    text-align: center;
+    height: 25pt;
+}
+
+
+.tr--expected_failure {
+    background: #f5c0a9;
+    text-align: center;
+    height: 25pt;
+}
+
+.tr--unexpected_success {
+    background: #f5c0a9;
+    text-align: center;
+    height: 25pt;
+}
+
+.td-testrun-outcome {
+    color: #4b1818;
+}
+
+.btn-testclass-details {
+
+}
+
+.btn-testrun-details {
+
+}
+
+.label-passed {
+    background: #3e9b3e;
+    border: none;
+    display: inline-block;
+    width: 75%;
+    color: white;
+    font-size: smaller;
+    align-items: center;
+    text-align: center;
+    border-radius: 4px;
+    font-weight: bold;
+    padding: 5px 0;
+}
+
+.label-skipped {
+    background: #868c86;
+    border: none;
+    display: inline-block;
+    width: 75%;
+    color: white;
+    font-size: smaller;
+    align-items: center;
+    text-align: center;
+    border-radius: 4px;
+    font-weight: bold;
+    padding: 5px 0;
+}
+
+.label-error {
+    background: #ee2929;
+    border: none;
+    display: inline-block;
+    width: 75%;
+    color: white;
+    font-size: smaller;
+    align-items: center;
+    text-align: center;
+    border-radius: 4px;
+    font-weight: bold;
+    padding: 5px 0;
+}
+
+.label-failure {
+    background: #f57b1d;
+    border: none;
+    display: inline-block;
+    width: 75%;
+    color: white;
+    font-size: smaller;
+    align-items: center;
+    text-align: center;
+    border-radius: 4px;
+    font-weight: bold;
+    padding: 5px 0;
+}
+
+.label-precondition_failure {
+    background: #f57b1d;
+    border: none;
+    display: inline-block;
+    width: 75%;
+    color: white;
+    font-size: smaller;
+    align-items: center;
+    text-align: center;
+    border-radius: 4px;
+    font-weight: bold;
+    padding: 5px 0;
+}
+
+.label-expected_failure {
+    background: #f57b1d;
+    border: none;
+    display: inline-block;
+    width: 75%;
+    color: white;
+    font-size: smaller;
+    align-items: center;
+    text-align: center;
+    border-radius: 4px;
+    font-weight: bold;
+    padding: 5px 0;
+}
+
+.label-unexpected_success {
+    background: #f57b1d;
+    border: none;
+    display: inline-block;
+    width: 75%;
+    color: white;
+    font-size: smaller;
+    align-items: center;
+    text-align: center;
+    border-radius: 4px;
+    font-weight: bold;
+    padding: 5px 0;
+}

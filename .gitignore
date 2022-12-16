@@ -1,0 +1,5 @@
+.idea/
+.tox/
+*.egg-info
+venv/
+docs/build/
