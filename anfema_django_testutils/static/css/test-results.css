@@ -1,214 +1,142 @@
+:root {
+    --skipped: #868c86;
+    --passed: #6CB83E;
+    --precondition_failure: #F59F73;
+    --failure: #D37647;
+    --expected_failure: #D37647;
+    --unexpected_success: #D37647;
+    --error: #B54F26;
+}
 
 .container {
     text-align: left;
     margin: 5pt;
 }
 
-.div-summary {
+.test-report-summary {
+    background: none;
+}
+.test-report-summary div {
+    padding: 5pt;
     text-align: left;
-    margin: 5pt;
+}
+.test-report-summary h1 {
+    padding: 5pt;
+    text-align: center;
+}
+.test-report-summary table {
+    width: 25%;
+    padding: 5pt;
+    text-align: left;
+}
+.test-report-summary tr, th, td {
+    background: none;
+    width: 50%;
+    padding-right: 5pt;
+    padding-left: 5pt;
+}
+.test-report-summary td {
+    text-align: right;
 }
 
-table.table-summary {
-    background: none;
-    width: 20%;
-}
-table.table-summary th {
+.testcase {
     background: none;
 }
-table.table-summary tr {
-    background: none;
+.testcase div {
 }
-
-.table-testclass {
+.testcase thead > tr:first-child {
+    height: 20pt;
+}
+.testcase table {
+    table-layout: fixed;
     width: 100%;
-    margin-top: 5pt;
     border-style: double;
     border-color: black;
+    margin: 5px;
 }
-
-.table-testclass tbody {
-    display: none;
-    /*width: 80%;*/
+.testcase td {
+    padding-right: 5pt;
+    padding-left: 5pt;
 }
-
-
-.col-class-name {
+.testcase th {
+    background: #91ABAB;
+    padding-right: 5pt;
+    padding-left: 5pt;
+    text-align: center;
+}
+/* testcase name */
+.testcase th:nth-child(1) {
     width: 80%;
     text-align: left;
 }
-
-.col-duration {
+/* duration */
+.testcase th:nth-child(2) {
     width: 7%;
-    border-color: black;
-    text-align: center;
 }
-
-.col-result {
+/* result */
+.testcase th:nth-child(3) {
     width: 10%;
-    text-align: center;
 }
-
-.col-button {
+/* detail button */
+.testcase th:nth-child(4) {
     width: 3%;
     alignment: center;
 }
-
-th {
-    background: #9cdcfe;
-    height: 20pt;
-    font-size: larger;
+.testcase tbody {
+    display: none;
+}
+.testcase button {
+    width: 30pt;
+    font-size: x-small;
 }
 
-.tr--passed {
-    background: lightgreen;
-    text-align: center;
+.testrun td {
+    padding-right: 5pt;
+    padding-left: 5pt;
+}
+.testrun tr {
     height: 25pt;
 }
-
-.tr--failure {
-    background: #f5c0a9;
-    text-align: center;
-    height: 25pt;
+.testrun-outcome {
+    color: var(--error);
+    column-span: 4;
+}
+.testrun button {
+    width: 30pt;
+    font-size: x-small;
+    align: center;
 }
 
-.tr--error {
-    background: lightcoral;
-    text-align: center;
-    height: 25pt;
+.color-bar {
+    padding-left: 5px;
+    padding-right: 5px;
 }
-
-.tr--skipped {
-    background: lightgrey;
-    text-align: center;
-    height: 25pt;
+.color-bar div {
+    height:10px;
+    float:left;
+    display:inline-block;
+    font-size: 0;
+    margin: 0px;
+    padding: 0px;
 }
-
-.tr--precondition_failure {
-    background: #f5c0a9;
-    text-align: center;
-    height: 25pt;
+.passed {
+    background: var(--passed);
 }
-
-
-.tr--expected_failure {
-    background: #f5c0a9;
-    text-align: center;
-    height: 25pt;
+.skipped {
+    background: var(--skipped);
 }
-
-.tr--unexpected_success {
-    background: #f5c0a9;
-    text-align: center;
-    height: 25pt;
+.error {
+    background: var(--error);
 }
-
-.td-testrun-outcome {
-    color: #4b1818;
+.failure {
+    background: var(--failure);
 }
-
-.btn-testclass-details {
-
+.unexpected_success {
+    background: var(--unexpected_success);
 }
-
-.btn-testrun-details {
-
+.expected_failure {
+    background: var(--expected_failure);
 }
-
-.label-passed {
-    background: #3e9b3e;
-    border: none;
-    display: inline-block;
-    width: 75%;
-    color: white;
-    font-size: smaller;
-    align-items: center;
-    text-align: center;
-    border-radius: 4px;
-    font-weight: bold;
-    padding: 5px 0;
-}
-
-.label-skipped {
-    background: #868c86;
-    border: none;
-    display: inline-block;
-    width: 75%;
-    color: white;
-    font-size: smaller;
-    align-items: center;
-    text-align: center;
-    border-radius: 4px;
-    font-weight: bold;
-    padding: 5px 0;
-}
-
-.label-error {
-    background: #ee2929;
-    border: none;
-    display: inline-block;
-    width: 75%;
-    color: white;
-    font-size: smaller;
-    align-items: center;
-    text-align: center;
-    border-radius: 4px;
-    font-weight: bold;
-    padding: 5px 0;
-}
-
-.label-failure {
-    background: #f57b1d;
-    border: none;
-    display: inline-block;
-    width: 75%;
-    color: white;
-    font-size: smaller;
-    align-items: center;
-    text-align: center;
-    border-radius: 4px;
-    font-weight: bold;
-    padding: 5px 0;
-}
-
-.label-precondition_failure {
-    background: #f57b1d;
-    border: none;
-    display: inline-block;
-    width: 75%;
-    color: white;
-    font-size: smaller;
-    align-items: center;
-    text-align: center;
-    border-radius: 4px;
-    font-weight: bold;
-    padding: 5px 0;
-}
-
-.label-expected_failure {
-    background: #f57b1d;
-    border: none;
-    display: inline-block;
-    width: 75%;
-    color: white;
-    font-size: smaller;
-    align-items: center;
-    text-align: center;
-    border-radius: 4px;
-    font-weight: bold;
-    padding: 5px 0;
-}
-
-.label-unexpected_success {
-    background: #f57b1d;
-    border: none;
-    display: inline-block;
-    width: 75%;
-    color: white;
-    font-size: smaller;
-    align-items: center;
-    text-align: center;
-    border-radius: 4px;
-    font-weight: bold;
-    padding: 5px 0;
+.precondition_failure {
+    background: var(--precondition_failure);
 }
