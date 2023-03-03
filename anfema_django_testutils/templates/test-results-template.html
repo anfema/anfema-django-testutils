@@ -1,6 +1,6 @@
 {% load static %}
 {% load mathfilters %}
-<!DOCTYPE html>
+<!--<!DOCTYPE html>-->
 <html lang="en">
     <head>
         <title>Test-Report</title>
@@ -9,9 +9,9 @@
     </head>
     <body>
         <div>
-            <h2>Test Results</h2>
-            <div class="div-summary">
-                <table class="table-summary">
+            <div class="test-report-summary">
+                <h1>Test Results</h1>
+                <table>
                     <tr>
                         <th>Timestamp:</th>
                         <td>{{ summary.timestamp }}</td>
@@ -26,103 +26,146 @@
                     </tr>
                     <tr>
                         <th>Skipped:</th>
-                        <td>{{ summary.skipped }}</td>
+                        <td style=background-color:var(--skipped);width:50%;>{{ summary.skipped }}</td>
                     </tr>
                     <tr>
                         <th>Passed:</th>
-                        <td>{{ summary.passed }}</td>
+                        <td style=background-color:var(--passed);width:50%:;>{{ summary.passed }}</td>
                     </tr>
                     <tr>
                         <th>Precondition Failures:</th>
-                        <td>{{ summary.precondition_failure }}</td>
+                        <td style=background-color:var(--precondition_failure);width:50%;>{{ summary.precondition_failure }}</td>
                     </tr>
                     <tr>
                         <th>Failures:</th>
-                        <td>{{ summary.failure }}</td>
+                        <td style=background-color:var(--failure);width:50%;>{{ summary.failure }}</td>
                     </tr>
                     <tr>
                         <th>Expected Failures:</th>
-                        <td>{{ summary.expected_failure }}</td>
+                        <td style=background-color:var(--expected_failure);width:50%;>{{ summary.expected_failure }}</td>
                     </tr>
                     <tr>
                         <th>Unexpected Successes:</th>
-                        <td>{{ summary.unexpected_success }}</td>
+                        <td style=background-color:var(--unexpected_success);width:50%;>{{ summary.unexpected_success }}</td>
                     </tr>
                     <tr>
                         <th>Errors:</th>
-                        <td>{{ summary.error }}</td>
+                        <td style=background-color:var(--error);width:50%;>{{ summary.error }}</td>
                     </tr>
                 </table>
             </div>
-            <div class="container" width="50%">
+            <div class="container">
                 {% for testcase, testcase_results in testcases.items %}
-                    <div>
-                        <table id="testclass" class="table-testclass">
-                        <thead>
-                            <tr class="test">
-                                <th class="col-class-name" align="left">{{ testcase }}</th>
-                                <th class="col-duration">Duration</th>
-                                <th class="col-result">Result</th>
-                                <th class="col-button">
-                                    <button class="btn-testclass-details">...</button>
-                                </th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Skipped: {{ testcase_results.summary.skipped }} |
-                                    Passed: {{ testcase_results.summary.passed }} |
-                                    Precondition Failures: {{ testcase_results.summary.precondition_failure }} |
-                                    Failures: {{ testcase_results.summary.failure }} |
-                                    Expected Failures: {{ testcase_results.summary.expected_failure }} |
-                                    Unexpected Successes: {{ testcase_results.summary.unexpected_success }} |
-                                    Errors: {{ testcase_results.summary.error }}
-                                </td>
-                                <td class="col-duration">
-                                    {{ testcase_results.summary.duration.total_seconds }}s
-                                </td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        {% for test in testcase_results.tests %}
-                            <tr class="tr tr--{{ test.result }}">
-                                <td class="col-class-name">{{ test.name }}</td>
-                                <td class="co-duration">{{ test.duration.total_seconds }}s</td>
-                                <td class="col-result"><span class="label-{{ test.result }}">{{ test.result }}</span></td>
-                                <td class="col-button">
-                                    {% if test.result != 'passed' %}
-                                        <button class="btn-testrun-details">View</button>
-                                    {% endif %}
-                                </td>
-                            </tr>
-                            <tr style="display: none">
-                                <td class="td-testrun-outcome" colspan="4"><pre>{{ test.outcome }}</pre></td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
+                    <div class="testcase">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>{{ testcase }}</th>
+                                    <th>Duration</th>
+                                    <th>Result</th>
+                                    <th>
+                                        <button class="btn-testcase-details">&ctdot;</button>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="color-bar">
+                                            {% with result_width=testcase_results.summary.skipped|div:testcase_results.summary.totals|mul:100 result=testcase_results.summary.skipped %}
+                                                <div class="skipped" style="width:{{ result_width }}%;">
+                                                    {{ result_width }}
+                                                </div>
+                                            {% endwith %}
+                                            {% with result_width=testcase_results.summary.passed|div:testcase_results.summary.totals|mul:100 result=testcase_results.summary.passed %}
+                                                <div class="passed" style="width:{{ result_width }}%;">
+                                                    {{ result_width }}
+                                                </div>
+                                            {% endwith %}
+                                            {% with result_width=testcase_results.summary.precondition_failure|div:testcase_results.summary.totals|mul:100 result=testcase_results.summary.precondition_failure %}
+                                                <div class="precondition_failure" style="width:{{ result_width }}%;">
+                                                    {{ result_width }}
+                                                </div>
+                                            {% endwith %}
+                                            {% with result_width=testcase_results.summary.failure|div:testcase_results.summary.totals|mul:100 result=testcase_results.summary.failure %}
+                                                <div class="failure" style="width:{{ result_width }}%;">
+                                                    {{ result_width }}
+                                                </div>
+                                            {% endwith %}
+                                            {% with result_width=testcase_results.summary.expected_failure|div:testcase_results.summary.totals|mul:100 result=testcase_results.summary.expected_failure %}
+                                                <div class="expected_failure" style="width:{{ result_width }}%;">
+                                                    {{ result_width }}
+                                                </div>
+                                            {% endwith %}
+                                            {% with result_width=testcase_results.summary.unexpected_success|div:testcase_results.summary.totals|mul:100 result=testcase_results.summary.unexpected_success %}
+                                                <div class="unexpected_success" style="width:{{ result_width }}%;">
+                                                    {{ result_width }}
+                                                </div>
+                                            {% endwith %}
+                                            {% with result_width=testcase_results.summary.error|div:testcase_results.summary.totals|mul:100 result=testcase_results.summary.error %}
+                                                <div class="error" style="width:{{ result_width }}%;">
+                                                    {{ result_width }}
+                                                </div>
+                                            {% endwith %}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        {{ testcase_results.summary.duration.total_seconds }}s
+                                    </td>
+                                    <td/>
+                                    <td/>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for test in testcase_results.tests %}
+                                    <tr class="testrun" style=background-color:var(--{{ test.result }})>
+                                        <td>
+                                            {{ test.name }}
+                                        </td>
+                                        <td>
+                                            {{ test.duration.total_seconds }}s
+                                        </td>
+                                        <td>
+                                            {{ test.result }}
+                                        </td>
+                                        <td align="center">
+                                            {% if test.result != 'passed' %}
+                                                <button class="btn-testrun-details">
+                                                    View
+                                                </button>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    <tr style="display: none">
+                                        <td class="testrun-outcome">
+                                            <pre>{{ test.outcome }}</pre>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
                 {% endfor %}
             </div>
         </div>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-        <script type="text/javascript">
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script type="text/javascript">
             $(document).ready(function(){
-                $('th').on('click', '.btn-testclass-details', function(e){
+                $('th').on('click', '.btn-testcase-details', function(e){
                     e.preventDefault();
                     e.stopImmediatePropagation();
                     var $this = $(this);
                     $(this).parents("table").find("tbody").toggle();
                     $this.text(function(i, text){
-                        if (text === '...') {
+                        if (text === '\u22EF') {
                             return 'Hide';
                         } else {
-                            return '...';
+                            return '\u22EF';
                         };
                     });
                 });
             });
-        </script>
-        <script type="text/javascript">
+    </script>
+    <script type="text/javascript">
             $(document).ready(function(){
                 $('td').on('click', '.btn-testrun-details', function(e){
                     e.preventDefault();
@@ -138,6 +181,6 @@
                     });
                 });
             });
-        </script>
-    </body>
+    </script>
+</body>
 </html>
