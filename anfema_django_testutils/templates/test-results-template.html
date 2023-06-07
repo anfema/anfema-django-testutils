@@ -52,6 +52,12 @@
                         <th>Errors:</th>
                         <td style=background-color:var(--error);width:50%;>{{ summary.error }}</td>
                     </tr>
+                    <tr>
+                        <th>Coverage Report:</th>
+                        <td>
+                            <a href="coverage/index.html">click here</a>
+                        </td>
+                    </tr>
                 </table>
             </div>
             <div class="container">
@@ -62,9 +68,13 @@
                                 <tr>
                                     <th>{{ testcase }}</th>
                                     <th>Duration</th>
-                                    <th>Result</th>
                                     <th>
-                                        <button class="btn-testcase-details">&ctdot;</button>
+                                        Result
+                                    </th>
+                                    <th>
+                                        <button class="btn-testcase-details">
+                                            &ctdot;
+                                        </button>
                                     </th>
                                 </tr>
                                 <tr>
