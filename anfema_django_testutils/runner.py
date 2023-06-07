@@ -4,6 +4,7 @@ from __future__ import annotations
 
 __all__ = ('TestRunner',)
 
+
 import argparse
 import contextlib
 import datetime
@@ -11,6 +12,7 @@ import itertools
 import pathlib
 import re
 import sys
+import textwrap
 import unittest.runner
 from collections import defaultdict, namedtuple
 from contextlib import nullcontext
@@ -38,6 +40,7 @@ if TYPE_CHECKING:
     import unittest
     from typing import Any, Dict, Tuple, Type, Union
 
+    _SubTest = unittest.case._SubTest
     _SysExcInfoType = Union[
         Tuple[Type[BaseException], BaseException, types.TracebackType],
         Tuple[None, None, None],
@@ -95,6 +98,7 @@ class HtmlTestResult(TestResult):
     )
 
     TestResultData = namedtuple('TestResultData', field_names=('name', 'result', 'duration', 'outcome'))
+    _subtest_result_map: defaultdict[unittest.case.TestCase, list[tuple[_SubTest, str, _SysExcInfoType]]]
 
     def __init__(self, *args, tests=None, **kwargs) -> None:
         super().__init__(*args, **kwargs)
@@ -104,8 +108,8 @@ class HtmlTestResult(TestResult):
         self.precondition_failures = []
         self.timestamp_start_testrun = None
         self.timestamp_stop_testrun = None
-
         self._test_result_data = defaultdict(list)
+        self._subtest_result_map = defaultdict(list)
         self._all_tests = tests
 
     def _add_test_result_data(self, test, result, outcome=None) -> None:
@@ -210,6 +214,9 @@ class HtmlTestResult(TestResult):
         """Called when the given test has been run"""
         super().stopTest(test)
         test.stop_time = timezone.now()
+        if subtests_results := self._subtest_result_map.pop(test, None):
+            result, outcome = self._resolve_subtests_results(test, subtests_results)
+            self._add_test_result_data(test, result, outcome)
 
     def addSkip(self, test: unittest.case.TestCase, reason: str) -> None:
         """Called when a test is skipped."""
@@ -253,6 +260,13 @@ class HtmlTestResult(TestResult):
         self._mirrorOutput = True
         self._add_test_result_data(test, 'precondition_failure', self._exc_info_to_string(err, test))
 
+    def addSubTest(self, test: unittest.case.TestCase, subtest, err: _SysExcInfoType) -> None:
+        """Called at the end of a subtest."""
+        if err is not None:
+            self._apply_subtest_result(test, subtest, err)
+            if getattr(self, 'failfast', False):
+                self.stop()
+
     def wasSuccessful(self) -> bool:
         """Tells whether or not this result was a success."""
         return len(self.precondition_failures) == 0 and super().wasSuccessful()
@@ -278,6 +292,40 @@ class HtmlTestResult(TestResult):
             f'expected failures={expected_failures}, precondition failures={precondition_failures}, '
             f'failures={failures}, unexpected successes={unexpected_successes}, errors={errors})'
         )
+
+    def _resolve_subtests_results(
+        self, test: unittest.case.TestCase, results: list[tuple[_SubTest, str, _SysExcInfoType]]
+    ) -> tuple[str, str]:
+        result_priority_map = {'error': 1, 'failure': 2, 'precondition_failure': 3}
+        reverse_result_priority_map = {v: k for k, v in result_priority_map.items()}
+        outcome = ''
+        result_priority = max(reverse_result_priority_map) + 1
+        for subtest, result, err in results:
+            assert result in result_priority_map, f'Invalid subtest result: {result!r}'
+            header = f'{result.upper()}: {subtest.id()}'
+            outcome += (
+                textwrap.dedent(
+                    f"""\
+            {len(header)*"="}
+            {header}
+            {len(header)*"-"}
+            """
+                )
+                + self._exc_info_to_string(err, test)
+                + 2 * '\n'
+            )
+            result_priority = min(result_priority_map[result], result_priority)
+        result = reverse_result_priority_map[result_priority]
+        return result, outcome.strip()
+
+    def _apply_subtest_result(self, test: unittest.case.TestCase, subtest: _SubTest, err: _SysExcInfoType) -> None:
+        if getattr(err[1], '__precondition_failure__', None):
+            result = 'precondition_failure'
+        elif issubclass(err[0], test.failureException):
+            result = 'failure'
+        else:
+            result = 'error'
+        self._subtest_result_map[test].append((subtest, result, err))
 
 
 class HtmlTestRunner(TextTestRunner):
