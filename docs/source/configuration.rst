@@ -51,6 +51,12 @@ The :mod:`anfema_django_testutils` provides some options that can be set in your
 
     | Default is :code:`"test-results.css"`.
 
+.. option:: TEST_REPORT_TITLE
+
+    A string which defines the test-report`s title.
+
+    | Default is :code:`"Test Results"`.
+
 Coverage settings
 -----------------
 
@@ -96,3 +102,5 @@ by following parameters:
   --report-dir DIR      Defines the directory where to store the report
                         artifacts. If this isn't provided, the TEST_REPORT_DIR
                         setting will be used.
+  --report-title TITLE  A string which defines the test-report`s title. If this
+                        isn't provided, the TEST_REPORT_TITLE setting will be used.
