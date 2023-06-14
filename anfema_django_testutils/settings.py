@@ -17,6 +17,7 @@ CONFIG_DEFAULTS = {
     "TEST_REPORT_CSS": "test-results.css",
     "COVERAGE_REPORT_ENABLED": True,
     "HTML_RESULTS_ENABLED": True,
+    "TEST_REPORT_TITLE": "Test Results",
 }
 
 

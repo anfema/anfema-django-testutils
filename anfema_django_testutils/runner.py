@@ -135,6 +135,7 @@ class HtmlTestResult(TestResult):
 
             # Create html test report
             html_template = get_config()['TEST_REPORT_HTML_TEMPLATE']
+            result_data['title'] = self.options.get('report_title')
             html_data = render_to_string(html_template, context=result_data)
             results_html_file = report_dir / 'test-results.html'
             results_html_file.write_text(html_data)
@@ -323,6 +324,16 @@ class TestRunner(CodeCoverageTestRunnerMixin, SnapshotTestRunnerMixin, DiscoverR
             default=get_config()["TEST_REPORT_DIR"],
             help="Defines the directory where to store the report artifacts. "
             "If this isn't provided, the TEST_REPORT_DIR setting will be used.",
+        )
+
+        parser.add_argument(
+            "--report-title",
+            action="store",
+            dest="report_title",
+            metavar="TITLE",
+            default=get_config()["TEST_REPORT_TITLE"],
+            help="A string which defines the test-report`s title."
+            "If this isn't provided, the TEST_REPORT_TITLE setting will be used.",
         )
 
     def __init__(self, *args, **kwargs) -> None:
