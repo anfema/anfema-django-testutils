@@ -122,7 +122,7 @@ class TestCaseMixin:
 
     @contextlib.contextmanager
     def assertNotRaises(
-        self, *unexpected_exception: Exception, atomic: bool = False, msg: str = None
+        self, *unexpected_exception: type[Exception], atomic: bool = False, msg: str = None
     ) -> Iterator[None]:
         """Fail if an exception of class *unexpected_exception* is raised by the callable.
 
@@ -130,7 +130,7 @@ class TestCaseMixin:
         suffered an error, or, if the exception is from type :class:`AssertionError` a failure
         respectively a precondition error if its from type :class:`PreconditionError`.
 
-        :param Exception \*unexpected_exception: Exception classes expected to not be raised.
+        :param type[Exception] \*unexpected_exception: Exception classes expected to not be raised.
         :param bool atomic: If set to :code:`True`, the context will be wrapped inside
           a transaction. Default is :code:`False`.
         :param str msg: Optional message to use on failure.
