@@ -1,10 +1,10 @@
 from __future__ import annotations
 
-
 __all__ = (
     "PreconditionError",
     "PreconditionContext",
     "precondition",
+    "repeat",
     "SimpleTestCase",
     "TransactionTestCase",
     "TestCase",
@@ -80,6 +80,56 @@ def precondition(func):
     return wrapper
 
 
+class repeat:
+    """Repeats a test method a given number of times.
+
+    The decorated test method will be executed within a subtest for each repetition, and
+    the result of each failed repetition will be displayed in the test report.
+
+    Use this decorator when you have a test method that you want to repeat multiple
+    times to ensure its stability and reliability. This can be particularly useful when
+    dealing with non-deterministic tests or to catch intermittent failures that might not
+    appear in a single test run.
+
+    .. code-block::
+
+        from anfema_django_testutils.testcases import TestCase, repeat
+
+
+        class CustomTestCase(TestCase):
+
+            @repeat(repetitions=100, fail_fast=True)
+            def test_to_be_repeated_100_times(self):
+                ...
+
+    :param int repetitions: The number of times the test method should be repeated.
+    :param bool fail_fast: If True, stop repeating the test method after the first failure.
+    """
+
+    def __init__(self, repetitions: int, *, fail_fast: bool = False):
+        if repetitions < 1:
+            raise ValueError(f"Argument repetitions must not be less then 1.")
+        self.repetitions = repetitions
+        self.fail_fast = fail_fast
+
+    def __call__(self, func: callable) -> callable:
+        @functools.wraps(func)
+        def wrapper(instance, *args, **kwargs):
+            for idx in range(self.repetitions):
+                with instance.subTest(msg=f"Repetition {idx + 1} of {self.repetitions}", fail_fast=self.fail_fast):
+                    try:
+                        subtest_failed = False
+                        func(instance, *args, **kwargs)
+                    except Exception as e:
+                        subtest_failed = True
+                        e.__traceback__ = e.__traceback__.tb_next
+                        raise
+                if subtest_failed and self.fail_fast:
+                    break
+
+        return wrapper
+
+
 class TestCaseMixin:
     preconditionFailureException = PreconditionError
 
@@ -144,8 +194,7 @@ class TestCaseMixin:
 
 
 class SimpleTestCase(TestCaseMixin, DjangoSimpleTestCase):
-    """Extends the :class:`django.test.SimpleTestCase` class with a precondition failure status.
-    """
+    """Extends the :class:`django.test.SimpleTestCase` class with a precondition failure status."""
 
 
 class TransactionTestCase(TestCaseMixin, DjangoTransactionTestCase):
