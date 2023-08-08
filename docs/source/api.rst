@@ -5,7 +5,7 @@ anfema_django_testutils.testcases
 ---------------------------------
 
 .. automodule:: anfema_django_testutils.testcases
-   :members: PreconditionError, PreconditionContext, precondition
+   :members: PreconditionError, PreconditionContext, precondition, repeat
 
 .. autoclass:: anfema_django_testutils.testcases.SimpleTestCase
    :members:
