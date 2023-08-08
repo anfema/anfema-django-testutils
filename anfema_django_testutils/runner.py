@@ -4,11 +4,11 @@ from __future__ import annotations
 
 __all__ = ('TestRunner',)
 
-
 import argparse
 import contextlib
 import datetime
 import itertools
+import os
 import pathlib
 import re
 import sys
@@ -24,9 +24,11 @@ from unittest.suite import _ErrorHolder
 from unittest.util import strclass
 
 from django.contrib.staticfiles import finders
+from django.core.management import color
+from django.core.management.base import OutputWrapper
 from django.template.loader import render_to_string
 from django.test.runner import DiscoverRunner
-from django.utils import timezone
+from django.utils import termcolors, timezone
 
 from coverage import Coverage
 from snapshottest.django import TestRunnerMixin as SnapshotTestRunnerMixin
@@ -57,6 +59,10 @@ class CoverageContext(Coverage):
     def __init__(self, report_dir: str) -> None:
         super().__init__()
         self._report_dir = f"{report_dir}/coverage"
+        self.stdout = OutputWrapper(sys.stdout)
+        self.stderr = OutputWrapper(sys.stderr)
+        self.style = color.no_style()
+        self.stderr.style_func = self.style.ERROR
 
     def __enter__(self) -> CoverageContext:
         self.erase()
@@ -67,8 +73,7 @@ class CoverageContext(Coverage):
         self.stop()
         self.save()
         self.html_report(directory=self._report_dir)
-        # ToDo: use stream instead of print
-        print(f'Generated coverage report: "{pathlib.Path(self._report_dir, "index.html").absolute()}"')
+        self.stdout.write(f'Generated coverage report: "{pathlib.Path(self._report_dir, "index.html").absolute()}"')
 
 
 class CodeCoverageTestRunnerMixin:
@@ -100,6 +105,34 @@ class HtmlTestResult(TestResult):
     TestResultData = namedtuple('TestResultData', field_names=('name', 'result', 'duration', 'outcome'))
     _subtest_result_map: defaultdict[unittest.case.TestCase, list[tuple[_SubTest, str, _SysExcInfoType]]]
 
+    @classmethod
+    def create_color_style(cls) -> color.Style:
+        """Create and return a custom color style based on the available options.
+
+        This method creates a custom color style for console output based on the available options.
+        If the `no-color` option is set or the console does not support color, the style will be configured
+        to have no color for each supported result. Otherwise, individual styles will be created for each
+        supported result, such as 'RESULT_ERROR', 'RESULT_FAILURE', 'RESULT_SKIPPED', etc., with specific
+        color and text formatting.
+
+        :returns: A custom color style object for console output.
+        """
+        style = color.color_style()
+
+        if cls.options.get("no_color") or not color.supports_color():
+            for result in cls.supported_results:
+                setattr(style, f"RESULT_{result.upper()}", termcolors.make_style(""))
+        else:
+            style.RESULT_ERROR = termcolors.make_style(fg='red', opts=('bold',))
+            style.RESULT_FAILURE = termcolors.make_style(fg='yellow', opts=('bold',))
+            style.RESULT_SKIPPED = termcolors.make_style(fg='white', opts=('bold',))
+            style.RESULT_PASSED = termcolors.make_style(fg='green', opts=('bold',))
+            style.RESULT_EXPECTED_FAILURE = termcolors.make_style(fg='magenta', opts=('bold',))
+            style.RESULT_UNEXPECTED_SUCCESS = termcolors.make_style(fg='yellow', opts=('bold',))
+            style.RESULT_PRECONDITION_FAILURE = termcolors.make_style(fg='yellow', opts=('bold',))
+
+        return style
+
     def __init__(self, *args, tests=None, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         self.dots = False
@@ -111,6 +144,11 @@ class HtmlTestResult(TestResult):
         self._test_result_data = defaultdict(list)
         self._subtest_result_map = defaultdict(list)
         self._all_tests = tests
+
+        self.stdout = OutputWrapper(sys.stdout)
+        self.stderr = OutputWrapper(sys.stderr)
+        self.style = self.create_color_style()
+        self.stderr.style_func = self.style.ERROR
 
     def _add_test_result_data(self, test, result, outcome=None) -> None:
         if isinstance(test, _ErrorHolder):
@@ -150,8 +188,7 @@ class HtmlTestResult(TestResult):
                 if not css_file.is_absolute():
                     css_file = pathlib.Path(finders.find(pathlib.Path('css', css_file)))
                 results_html_file.with_name(css_file.name).write_text(css_file.read_text())
-            # ToDo: use stream instead of print
-            print(f'Generated test report: "{results_html_file.absolute()}"')
+            self.stdout.write(f'Generated test report: "{results_html_file.absolute()}"')
 
     def make_result_data(self) -> Dict[str, Any]:
         test_suite_exec_summary = dict()
@@ -198,8 +235,7 @@ class HtmlTestResult(TestResult):
         """Called once before any tests are executed."""
         self.timestamp_start_testrun = timezone.now()
         self.timestamp_stop_testrun = None
-        # ToDo: use stream instead of print
-        print()
+        self.stdout.write()
 
     def startTest(self, test: unittest.case.TestCase) -> None:
         """Called when the given test is about to be run"""
@@ -273,9 +309,13 @@ class HtmlTestResult(TestResult):
         return len(self.precondition_failures) == 0 and super().wasSuccessful()
 
     def print_test_result(self, test: unittest.case.TestCase, result: str) -> None:
-        result_width = max(map(len, self.supported_results)) + 10
-        # ToDo: use stream instead of print
-        print(f"{result.upper().replace('_', ' '):.<{result_width}} {test}")
+        max_result_width = max(map(len, self.supported_results)) + 10
+        cur_result_width = len(result)
+        style = getattr(self.style, f"RESULT_{result.upper()}")
+
+        self.stdout.write(style(result.upper()), ending="")
+        self.stdout.write("." * (max_result_width - cur_result_width), ending="")
+        self.stdout.write(" " + str(test))
 
     def printErrors(self) -> None:
         results = list(map(attrgetter('result'), itertools.chain.from_iterable(self._test_result_data.values())))
@@ -287,11 +327,15 @@ class HtmlTestResult(TestResult):
         unexpected_successes = results.count('unexpected_success')
         errors = results.count('error')
 
-        print()
-        print(
-            f'{"OK" if self.wasSuccessful() else "FAILED"} (skipped={skipped}, passed={passed}, '
-            f'expected failures={expected_failures}, precondition failures={precondition_failures}, '
-            f'failures={failures}, unexpected successes={unexpected_successes}, errors={errors})'
+        style = self.style.SUCCESS if self.wasSuccessful() else self.style.ERROR
+
+        self.stdout.write()
+        self.stdout.write(
+            style(
+                f'{"OK" if self.wasSuccessful() else "FAILED"} (skipped={skipped}, passed={passed}, '
+                f'expected failures={expected_failures}, precondition failures={precondition_failures}, '
+                f'failures={failures}, unexpected successes={unexpected_successes}, errors={errors})'
+            )
         )
 
     def _resolve_subtests_results(
@@ -331,6 +375,10 @@ class HtmlTestResult(TestResult):
 
 class HtmlTestRunner(TextTestRunner):
     resultclass = HtmlTestResult
+
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault('stream', open(os.devnull, 'w'))
+        super().__init__(*args, **kwargs)
 
     def run(self, test: unittest.suite.TestSuite) -> HtmlTestResult:
         # ToDo: Consider to override the run() method to keep 'test'
