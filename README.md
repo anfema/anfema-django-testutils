@@ -9,8 +9,9 @@ This package integrates [snapshottest](https://github.com/syrusakbary/snapshotte
 `anfema_django_testutils` is supported on:
 - Python >= 3.9
 
-Source available at: https://github.com/anfema/anfema-django-testutils
-Documentation: https://anfema.github.io/anfema-django-testutils/index.html
+
+- Source available at: https://github.com/anfema/anfema-django-testutils
+- Documentation: https://anfema.github.io/anfema-django-testutils/index.html
 
 ## Installation
 ```bash
