@@ -1,15 +1,16 @@
 # anfema-django-testutils
 The main intention of the `anfema_django_testutils` app is to provide a Django test runner which considers
-snapshot tests as well as code coverage and human-readable html test reports. Moreover, the test result 
+snapshot tests as well as code coverage and human-readable html test reports. Moreover, the test result
 `Precondition Failure` has been added.
 
-This package integrates [snapshottest](https://github.com/syrusakbary/snapshottest) as well as 
+This package integrates [snapshottest](https://github.com/syrusakbary/snapshottest) as well as
 [coverage](https://coverage.readthedocs.io/en/latest/).
 
 `anfema_django_testutils` is supported on:
 - Python >= 3.9
 
 Source available at: https://github.com/anfema/anfema-django-testutils
+Documentation: https://anfema.github.io/anfema-django-testutils/index.html
 
 ## Installation
 ```bash
