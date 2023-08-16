@@ -1,5 +1,9 @@
 .idea/
 .tox/
+.venv/
 *.egg-info
 venv/
 docs/build/
+
+*.pyc
+__pycache__/
