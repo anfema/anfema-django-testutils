@@ -303,6 +303,14 @@ class HtmlTestResult(TestResult):
             self._apply_subtest_result(test, subtest, err)
             if getattr(self, 'failfast', False):
                 self.stop()
+            if issubclass(err[0], test.failureException):
+                errors = self.failures
+            elif issubclass(err[0], test.preconditionFailureException):
+                errors = self.precondition_failures
+            else:
+                errors = self.errors
+            errors.append((subtest, self._exc_info_to_string(err, test)))
+            self._mirrorOutput = True
 
     def wasSuccessful(self) -> bool:
         """Tells whether or not this result was a success."""
