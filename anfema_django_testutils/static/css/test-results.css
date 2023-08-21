@@ -11,6 +11,7 @@
 .container {
     text-align: left;
     margin: 5pt;
+    margin-top: 20px;
 }
 
 .test-report-summary {
