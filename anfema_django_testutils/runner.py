@@ -95,11 +95,11 @@ class HtmlTestResult(TestResult):
     supported_results = (
         'error',
         'failure',
-        'skipped',
-        'passed',
-        'expected_failure',
         'unexpected_success',
         'precondition_failure',
+        'expected_failure',
+        'passed',
+        'skipped',
     )
 
     TestResultData = namedtuple('TestResultData', field_names=('name', 'result', 'duration', 'outcome'))
@@ -177,10 +177,12 @@ class HtmlTestResult(TestResult):
 
             # Create html test report
             html_template = get_config()['TEST_REPORT_HTML_TEMPLATE']
+            result_data['supported_results'] = self.supported_results
             result_data['title'] = self.options.get('report_title')
             html_data = render_to_string(html_template, context=result_data)
             results_html_file = report_dir / 'test-results.html'
             results_html_file.write_text(html_data)
+
 
             # Copy css file into the report directory
             with contextlib.suppress(TypeError):
@@ -188,6 +190,8 @@ class HtmlTestResult(TestResult):
                 if not css_file.is_absolute():
                     css_file = pathlib.Path(finders.find(pathlib.Path('css', css_file)))
                 results_html_file.with_name(css_file.name).write_text(css_file.read_text())
+            js_file = pathlib.Path(finders.find(pathlib.Path('js', 'test-results.js')))
+            (report_dir / 'test-results.js').write_text(js_file.read_text())
             self.stdout.write(f'Generated test report: "{results_html_file.absolute()}"')
 
     def make_result_data(self) -> Dict[str, Any]:
