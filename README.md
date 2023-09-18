@@ -6,18 +6,21 @@ snapshot tests as well as code coverage and human-readable html test reports. Mo
 This package integrates [snapshottest](https://github.com/syrusakbary/snapshottest) as well as
 [coverage](https://coverage.readthedocs.io/en/latest/).
 
-`anfema_django_testutils` is supported on:
-- Python >= 3.9
-
-
+## Links
 - Source available at: https://github.com/anfema/anfema-django-testutils
-- Documentation: https://anfema.github.io/anfema-django-testutils/index.html
+- Documentation available at: https://anfema.github.io/anfema-django-testutils
+
+## Prerequisites
+`anfema_django_testutils` is officially supported on:
+- Python >= 3.9
+- Django >= 3.2
 
 ## Installation
 ```bash
 $ pip install anfema-django-testutils
 ```
 ## Setting up
+
 
 Update your Django `settings.py` to use the `anfema_django_testutils` test runner:
 ```python
@@ -56,6 +59,17 @@ $ pip install tox
 
 ```bash
 $ tox -e docs -- docs/build
+```
+
+## Run tests
+To execute the `anfema_django_testutils` tests, run in a terminal:
+
+```bash
+$ pip install tox
+```
+
+```bash
+$ tox
 ```
 
 ## License

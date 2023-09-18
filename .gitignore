@@ -1,9 +1,12 @@
-.idea/
-.tox/
-.venv/
-*.egg-info
-venv/
-docs/build/
+*
 
-*.pyc
-__pycache__/
+!.github/
+!./anfema_django_testutils/*
+!./docs/*
+./docs/build/
+!./tests/
+!./LICENSE
+!./README.md
+!./pyproject.toml
+!./setup.py
+!./tox.ini
