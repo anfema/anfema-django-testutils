@@ -154,7 +154,7 @@ class HtmlTestResult(TestResult):
         if isinstance(test, _ErrorHolder):
             # In case an _ErrorHolder instance has been passed, which means setting up the testcase has been failed,
             # none of the testcase`s test methods have been executed, and thus they will all be set to the same result.
-            parent = re.search('\((.+)\)', test.description).group(1)
+            parent = re.search(r'\((.+)\)', test.description).group(1)
             module, testcase_name = parent.rsplit('.', 1)
             testcase_class = getattr(sys.modules[module], testcase_name)
             for test in filter(lambda testmethod: isinstance(testmethod, testcase_class), self._all_tests):
@@ -182,7 +182,6 @@ class HtmlTestResult(TestResult):
             html_data = render_to_string(html_template, context=result_data)
             results_html_file = report_dir / 'test-results.html'
             results_html_file.write_text(html_data)
-
 
             # Copy css file into the report directory
             with contextlib.suppress(TypeError):
