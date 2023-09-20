@@ -2,6 +2,7 @@
    :hidden:
 
    configuration
+   contrib
    api
    license
 
