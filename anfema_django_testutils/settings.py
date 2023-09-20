@@ -14,7 +14,7 @@ if TYPE_CHECKING:
 CONFIG_DEFAULTS = {
     "TEST_REPORT_DIR": "test-report",
     "TEST_REPORT_HTML_TEMPLATE": "test-results-template.html",
-    "TEST_REPORT_CSS": "test-results.css",
+    "TEST_REPORT_CSS": "css/test-results.css",
     "COVERAGE_REPORT_ENABLED": True,
     "HTML_RESULTS_ENABLED": True,
     "TEST_REPORT_TITLE": "Test Results",

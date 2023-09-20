@@ -14,14 +14,19 @@ keywords = [
 ]
 license = {file = "LICENSE"}
 classifiers = [
-    "Framework :: Django",
+    "Framework :: Django :: 3.2",
+    "Framework :: Django :: 4.1",
+    "Framework :: Django :: 4.2",
+    "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
+    "License :: OSI Approved :: MIT License",
 ]
 requires-python = ">=3.9"
 dynamic = ["version"]
 dependencies = [
+    "django>=3.2",
     "django-mathfilters",
     "coverage[toml]",
     "snapshottest",
@@ -31,10 +36,6 @@ dependencies = [
 anfema_django_testutils = ["templates/**", "static/**"]
 
 [project.optional-dependencies]
-dev = [
-    "black",
-    "isort",
-]
 docs = [
     "sphinx~=5.1",
     "sphinx-autodoc-typehints",
@@ -42,9 +43,20 @@ docs = [
     "sphinx-copybutton",
     "m2r2",
 ]
+tests = [
+    "parametrize",
+]
 
 [project.urls]
 Source = "https://github.com/anfema/anfema-django-testutils"
+Documentation = "https://anfema.github.io/anfema-django-testutils"
+
+[tool.flit.sdist]
+exclude = [
+    "docs/",
+    "tests/",
+    "tox.ini"
+]
 
 [tool.black]
 line-length = 120
@@ -56,3 +68,6 @@ profile = "black"
 known_django = "django"
 sections = ["FUTURE", "STDLIB", "DJANGO", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
 lines_after_imports = 2
+
+[tool.flake8]
+max-line-length = 120

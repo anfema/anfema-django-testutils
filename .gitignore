@@ -1,9 +1,19 @@
+# IDE
 .idea/
-.tox/
-.venv/
-*.egg-info
-venv/
+
+# Distribution / packaging
+dist/
+*.egg-info/
+
+# Sphinx documentation
 docs/build/
 
-*.pyc
+# pyenv
+.python-version
+
+# Byte-compiled
 __pycache__/
+*.py*.py[cod]
+
+# Unit test / coverage reports
+.tox/

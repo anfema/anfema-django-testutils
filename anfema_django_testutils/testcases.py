@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+
 __all__ = (
     "PreconditionError",
     "PreconditionContext",
@@ -108,7 +109,7 @@ class repeat:
 
     def __init__(self, repetitions: int, *, fail_fast: bool = False):
         if repetitions < 1:
-            raise ValueError(f"Argument repetitions must not be less then 1.")
+            raise ValueError("Argument repetitions must not be less then 1.")
         self.repetitions = repetitions
         self.fail_fast = fail_fast
 
@@ -180,7 +181,7 @@ class TestCaseMixin:
         suffered an error, or, if the exception is from type :class:`AssertionError` a failure
         respectively a precondition error if its from type :class:`PreconditionError`.
 
-        :param type[Exception] \*unexpected_exception: Exception classes expected to not be raised.
+        :param type[Exception] \\*unexpected_exception: Exception classes expected to not be raised.
         :param bool atomic: If set to :code:`True`, the context will be wrapped inside
           a transaction. Default is :code:`False`.
         :param str msg: Optional message to use on failure.
