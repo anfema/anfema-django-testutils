@@ -1,12 +1,19 @@
-*
+# IDE
+.idea/
 
-!.github/
-!./anfema_django_testutils/*
-!./docs/*
-./docs/build/
-!./tests/
-!./LICENSE
-!./README.md
-!./pyproject.toml
-!./setup.py
-!./tox.ini
+# Distribution / packaging
+dist/
+*.egg-info/
+
+# Sphinx documentation
+docs/build/
+
+# pyenv
+.python-version
+
+# Byte-compiled
+__pycache__/
+*.py*.py[cod]
+
+# Unit test / coverage reports
+.tox/
