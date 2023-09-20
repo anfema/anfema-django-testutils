@@ -16,7 +16,7 @@ def check_config(app_configs, **kwargs):
     if not isinstance(config["TEST_REPORT_DIR"], str):
         errors.append(
             Error(
-                f"The TEST_REPORT_DIR setting must be a string.",
+                "The TEST_REPORT_DIR setting must be a string.",
                 id=f"{app_label}.E001",
                 obj="Improper Configuration",
             ),
