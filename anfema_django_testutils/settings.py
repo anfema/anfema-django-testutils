@@ -9,7 +9,7 @@ from django.test.signals import setting_changed
 
 
 if TYPE_CHECKING:
-    from typing import Any, Dict
+    from typing import Any
 
 CONFIG_DEFAULTS = {
     "TEST_REPORT_DIR": "test-report",
@@ -22,7 +22,7 @@ CONFIG_DEFAULTS = {
 
 
 @lru_cache()
-def get_config() -> Dict[str, Any]:
+def get_config() -> dict[str, Any]:
     """Returns the current configuration"""
     return {conf: getattr(settings, conf, default) for conf, default in CONFIG_DEFAULTS.items()}
 

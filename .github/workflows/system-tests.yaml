@@ -1,4 +1,4 @@
-name: Unittests
+name: System Tests
 
 on:
   - push
@@ -6,11 +6,11 @@ on:
 
 jobs:
   tox:
-    name: Unittests
+    name: System Tests
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.9", "3.10", "3.11"]
+        python-version: ["3.11"]
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python-version }}
@@ -22,4 +22,4 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install tox tox-gh-actions
     - name: Test with tox
-      run: tox run-parallel --skip-env='^(flake|black|isort|system-tests)$' --parallel-no-spinner
+      run: tox -e system-tests
