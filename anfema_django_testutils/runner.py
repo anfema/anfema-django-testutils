@@ -185,9 +185,9 @@ class HtmlTestResult(TestResult):
 
             # Copy css file into the report directory
             with contextlib.suppress(TypeError):
-                css_file = pathlib.Path(get_config()['TEST_REPORT_CSS'] or None)
+                css_file = pathlib.Path(get_config()['TEST_REPORT_CSS'])
                 if not css_file.is_absolute():
-                    css_file = pathlib.Path(finders.find(pathlib.Path('css', css_file)))
+                    css_file = pathlib.Path(finders.find(css_file))
                 results_html_file.with_name(css_file.name).write_text(css_file.read_text())
             js_file = pathlib.Path(finders.find(pathlib.Path('js', 'test-results.js')))
             (report_dir / 'test-results.js').write_text(js_file.read_text())
@@ -446,3 +446,6 @@ class TestRunner(CodeCoverageTestRunnerMixin, SnapshotTestRunnerMixin, DiscoverR
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         self.test_runner.resultclass.options = kwargs
+
+    def suite_result(self, suite, result, **kwargs):
+        return super().suite_result(suite, result, **kwargs) + len(result.precondition_failures)
