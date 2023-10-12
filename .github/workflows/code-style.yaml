@@ -22,7 +22,7 @@ jobs:
         with:
           python-version: "3.11"
       - name: Check imports
-        uses: isort/isort-action@v1.0.0
+        uses: isort/isort-action@v1.1.0
       - name: Check formatting
         uses: psf/black@stable
       - name: Setup flake8 annotations
