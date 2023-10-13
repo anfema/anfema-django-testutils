@@ -1,4 +1,4 @@
-name: Python Code Style
+name: Coding Style & Unittests
 
 on:
   pull_request:
@@ -12,20 +12,20 @@ on:
 
 jobs:
   code-style-checks:
-    name: Python Code Style Checks
+    name: Test with tox
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.10", "3.11"]
     steps:
-      - name: Checkout commit
-        uses: actions/checkout@v3.1.0
-      - name: Set up Python 3.11
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.11"
-      - name: Check imports
-        uses: isort/isort-action@v1.1.0
-      - name: Check formatting
-        uses: psf/black@stable
-      - name: Setup flake8 annotations
-        uses: rbialon/flake8-annotations@v1
-      - name: Linting (flake8)
-        uses: py-actions/flake8@v2.2.1
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        python -m pip install tox tox-gh-actions
+    - name: Test with tox
+      run: tox
