@@ -22,5 +22,5 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install tox tox-gh-actions
     - name: Test with tox
-      run: tox run-parallel -e flake,isort,black
+      run: tox run-parallel -e flake,isort,black --parallel-no-spinner
 
