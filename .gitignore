@@ -17,3 +17,4 @@ __pycache__/
 
 # Unit test / coverage reports
 .tox/
+.flakeheaven_cache/

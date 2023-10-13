@@ -1,18 +1,9 @@
-name: Coding Style & Unittests
-
 on:
-  pull_request:
-    paths:
-      - "pyproject.toml"
-      - "**.py"
-  push:
-    paths:
-      - "pyproject.toml"
-      - "**.py"
+  - push
+  - pull_request
 
 jobs:
-  code-style-checks:
-    name: Test with tox
+  tox:
     runs-on: ubuntu-latest
     strategy:
       matrix:
