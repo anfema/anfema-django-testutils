@@ -6,6 +6,7 @@ on:
 
 jobs:
   tox:
+    name: Test with tox
     runs-on: ubuntu-latest
     strategy:
       matrix:
