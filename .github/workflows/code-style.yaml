@@ -4,6 +4,7 @@ on:
 
 jobs:
   tox:
+    name: Unittests & Coding Style
     runs-on: ubuntu-latest
     strategy:
       matrix:
