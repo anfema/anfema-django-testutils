@@ -367,8 +367,8 @@ class HtmlTestResult(TestResult):
             {len(header)*"-"}
             """
                 )
-                + self._exc_info_to_string(err, test)
-                + 2 * '\n'
+                + self._exc_info_to_string(err, test)  # noqa: W503
+                + 2 * '\n'  # noqa: W503
             )
             result_priority = min(result_priority_map[result], result_priority)
         result = reverse_result_priority_map[result_priority]
