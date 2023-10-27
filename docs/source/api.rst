@@ -12,10 +12,10 @@ anfema_django_testutils.testcases
    :inherited-members:
 
 .. autoclass:: anfema_django_testutils.testcases.TransactionTestCase
-   :members:
+   :members: transactionSubTest
 
 .. autoclass:: anfema_django_testutils.testcases.TestCase
-   :members:
+   :members: transactionSubTest
 
 
 anfema_django_testutils.tags
