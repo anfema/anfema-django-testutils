@@ -61,6 +61,7 @@ exclude = [
 [tool.black]
 line-length = 120
 skip-string-normalization = true
+extend_exclude = ".*/test_settings_.*.py"
 
 [tool.isort]
 line_length = 120
@@ -68,6 +69,8 @@ profile = "black"
 known_django = "django"
 sections = ["FUTURE", "STDLIB", "DJANGO", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
 lines_after_imports = 2
+skip_glob = ["**/test_settings_*.py"]
 
 [tool.flakeheaven]
 max_line_length = 120
+exclude = ["**/test_settings_*.py"]
