@@ -194,18 +194,38 @@ class TestCaseMixin:
             raise self.fail(self._formatMessage(msg, standard_msg))
 
 
+class TransactionTestCaseMixin(TestCaseMixin):
+    @contextlib.contextmanager
+    def transactionSubTest(self, msg=None, **params):
+        """Like :meth:`unittest.TestCase.subTest`, but runs  within a transaction and ensures this transaction
+        is rolled back afterward.
+
+        On database backends with no transaction support, :meth:`transactionSubTest` behaves as
+        :meth:`unittest.TestCase.subTest`.
+
+        :param str msg: Optional message used in case of failure.
+        :param \\**params: Additional information or context for the subtest.
+        """
+        if databases_support_transactions := self._databases_support_transactions():
+            atomics = self._enter_atomics()
+        with self.subTest(**(params | ({} if msg is None else {"msg": msg}))):
+            yield
+        if databases_support_transactions:
+            self._rollback_atomics(atomics)
+
+
 class SimpleTestCase(TestCaseMixin, DjangoSimpleTestCase):
     """Extends the :class:`django.test.SimpleTestCase` class with a precondition failure status."""
 
 
-class TransactionTestCase(TestCaseMixin, DjangoTransactionTestCase):
+class TransactionTestCase(TransactionTestCaseMixin, DjangoTransactionTestCase):
     """Extends the :class:`django.test.TransactionTestCase` class with a precondition failure status.
 
     .. seealso:: :class:`SimpleTestCase`
     """
 
 
-class TestCase(TestCaseMixin, DjangoTestCase):
+class TestCase(TransactionTestCaseMixin, DjangoTestCase):
     """Extends the :class:`django.test.TestCase` class with a precondition failure status.
 
     .. seealso:: :class:`SimpleTestCase`
