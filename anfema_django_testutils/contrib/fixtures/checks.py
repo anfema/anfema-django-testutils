@@ -33,7 +33,7 @@ def check_config(app_configs=None, **kwargs):
     elif not all([isinstance(i, str) for i in config["FIXTURE_DIRS"]]):
         errors.append(
             Error(
-                f"At least one item of FIXTURE_DIRS settings is not a string.",
+                "At least one item of FIXTURE_DIRS settings is not a string.",
                 id=f"{app_label}.E001",
                 obj="Improper Configuration",
             ),
@@ -68,7 +68,7 @@ def check_config(app_configs=None, **kwargs):
     elif not all([isinstance(i, str) for i in config["FIXTURE_MEDIAFILE_DIRS"]]):
         errors.append(
             Error(
-                f"At least one item of FIXTURE_MEDIAFILE_DIRS settings is not a string.",
+                "At least one item of FIXTURE_MEDIAFILE_DIRS settings is not a string.",
                 id=f"{app_label}.E001",
                 obj="Improper Configuration",
             ),

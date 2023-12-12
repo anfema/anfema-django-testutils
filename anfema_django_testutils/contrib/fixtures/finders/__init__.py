@@ -1,1 +1,1 @@
-from . import fixture, media
+from . import fixture, media  # noqa: F401
