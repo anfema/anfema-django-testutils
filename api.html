@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API &mdash; anfema-django-testutils 0.8.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/clipboard.min.js"></script>
+        <script src="_static/copybutton.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="License" href="license.html" />
+    <link rel="prev" title="Contrib" href="contrib.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            anfema-django-testutils
+          </a>
+              <div class="version">
+                0.8.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contrib.html">Contrib</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">anfema-django-testutils</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">API</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/api.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="api">
+<h1>API<a class="headerlink" href="#api" title="Permalink to this heading"></a></h1>
+<section id="module-anfema_django_testutils.testcases">
+<span id="anfema-django-testutils-testcases"></span><h2>anfema_django_testutils.testcases<a class="headerlink" href="#module-anfema_django_testutils.testcases" title="Permalink to this heading"></a></h2>
+<dl class="py exception">
+<dt class="sig sig-object py" id="anfema_django_testutils.testcases.PreconditionError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">anfema_django_testutils.testcases.</span></span><span class="sig-name descname"><span class="pre">PreconditionError</span></span><a class="headerlink" href="#anfema_django_testutils.testcases.PreconditionError" title="Permalink to this definition"></a></dt>
+<dd><p>Exception to indicate a precondition failure.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="anfema_django_testutils.testcases.PreconditionContext">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">anfema_django_testutils.testcases.</span></span><span class="sig-name descname"><span class="pre">PreconditionContext</span></span><a class="headerlink" href="#anfema_django_testutils.testcases.PreconditionContext" title="Permalink to this definition"></a></dt>
+<dd><p>Context manager to handle precondition failures.</p>
+<p>This context tags every raised <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AssertionError" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">AssertionError</span></code></a> as precondition error.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">PreconditionContext</span><span class="p">():</span>
+     <span class="n">do_something</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="anfema_django_testutils.testcases.precondition">
+<span class="sig-prename descclassname"><span class="pre">anfema_django_testutils.testcases.</span></span><span class="sig-name descname"><span class="pre">precondition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#anfema_django_testutils.testcases.precondition" title="Permalink to this definition"></a></dt>
+<dd><p>Decorator to define a callable as precondition.</p>
+<p>Wraps a callable into a <a class="reference internal" href="#anfema_django_testutils.testcases.PreconditionContext" title="anfema_django_testutils.testcases.PreconditionContext"><code class="xref py py-class docutils literal notranslate"><span class="pre">PreconditionContext</span></code></a>, so that any <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AssertionError" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">AssertionError</span></code></a>
+raised by the callable will lead to a precondition failure rather than a
+failure of the test.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">anfema_django_testutils.testcases</span> <span class="kn">import</span> <span class="n">TestCase</span><span class="p">,</span> <span class="n">precondition</span>
+
+
+<span class="k">class</span> <span class="nc">CustomTestCase</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+
+    <span class="nd">@precondition</span>
+    <span class="k">def</span> <span class="nf">custom_precondition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">do_something</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="anfema_django_testutils.testcases.repeat">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">anfema_django_testutils.testcases.</span></span><span class="sig-name descname"><span class="pre">repeat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repetitions</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fail_fast</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#anfema_django_testutils.testcases.repeat" title="Permalink to this definition"></a></dt>
+<dd><p>Repeats a test method a given number of times.</p>
+<p>The decorated test method will be executed within a subtest for each repetition, and
+the result of each failed repetition will be displayed in the test report.</p>
+<p>Use this decorator when you have a test method that you want to repeat multiple
+times to ensure its stability and reliability. This can be particularly useful when
+dealing with non-deterministic tests or to catch intermittent failures that might not
+appear in a single test run.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">anfema_django_testutils.testcases</span> <span class="kn">import</span> <span class="n">TestCase</span><span class="p">,</span> <span class="n">repeat</span>
+
+
+<span class="k">class</span> <span class="nc">CustomTestCase</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+
+    <span class="nd">@repeat</span><span class="p">(</span><span class="n">repetitions</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">fail_fast</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">test_to_be_repeated_100_times</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="o">...</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>repetitions</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – The number of times the test method should be repeated.</p></li>
+<li><p><strong>fail_fast</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – If True, stop repeating the test method after the first failure.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="anfema_django_testutils.testcases.SimpleTestCase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">anfema_django_testutils.testcases.</span></span><span class="sig-name descname"><span class="pre">SimpleTestCase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#anfema_django_testutils.testcases.SimpleTestCase" title="Permalink to this definition"></a></dt>
+<dd><p>Extends the <a class="reference external" href="https://docs.djangoproject.com/en/stable/topics/testing/tools/#django.test.SimpleTestCase" title="(in Django v5.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">django.test.SimpleTestCase</span></code></a> class with a precondition failure status.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="anfema_django_testutils.testcases.SimpleTestCase.assertNotRaises">
+<span class="sig-name descname"><span class="pre">assertNotRaises</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">unexpected_exception</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atomic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#anfema_django_testutils.testcases.SimpleTestCase.assertNotRaises" title="Permalink to this definition"></a></dt>
+<dd><p>Fail if an exception of class <em>unexpected_exception</em> is raised by the callable.</p>
+<p>Any other exception type will not be caught, and the test case will be deemed to have
+suffered an error, or, if the exception is from type <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AssertionError" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">AssertionError</span></code></a> a failure
+respectively a precondition error if its from type <a class="reference internal" href="#anfema_django_testutils.testcases.PreconditionError" title="anfema_django_testutils.testcases.PreconditionError"><code class="xref py py-class docutils literal notranslate"><span class="pre">PreconditionError</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>*unexpected_exception</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.12)"><em>type</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.12)"><em>Exception</em></a><em>]</em>) – Exception classes expected to not be raised.</p></li>
+<li><p><strong>atomic</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – If set to <code class="code docutils literal notranslate"><span class="pre">True</span></code>, the context will be wrapped inside
+a transaction. Default is <code class="code docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+<li><p><strong>msg</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Optional message to use on failure.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterator" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterator</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="anfema_django_testutils.testcases.SimpleTestCase.assertPrecondition">
+<span class="sig-name descname"><span class="pre">assertPrecondition</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#anfema_django_testutils.testcases.SimpleTestCase.assertPrecondition" title="Permalink to this definition"></a></dt>
+<dd><p>Context manager to handle precondition failures.</p>
+<p>Any <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AssertionError" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">AssertionError</span></code></a> or subclass of it, which is raised within the context will
+indicate the test has been finished with precondition failure rather than failure. Any other
+exception type will not be caught, and the test case will be deemed to have suffered an error,
+exactly as for an unexpected exception.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertPrecondition</span><span class="p">():</span>
+     <span class="n">do_something</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="anfema_django_testutils.testcases.SimpleTestCase.fail_precondition">
+<span class="sig-name descname"><span class="pre">fail_precondition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#anfema_django_testutils.testcases.SimpleTestCase.fail_precondition" title="Permalink to this definition"></a></dt>
+<dd><p>Fail immediately with <a class="reference internal" href="#anfema_django_testutils.testcases.PreconditionError" title="anfema_django_testutils.testcases.PreconditionError"><code class="xref py py-class docutils literal notranslate"><span class="pre">PreconditionError</span></code></a>.</p>
+<p>Call this method from a test case if you want to indicate it has
+been finished with precondition failure rather than failure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>msg</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Optional message to use.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="anfema_django_testutils.testcases.SimpleTestCase.preconditionFailureException">
+<span class="sig-name descname"><span class="pre">preconditionFailureException</span></span><a class="headerlink" href="#anfema_django_testutils.testcases.SimpleTestCase.preconditionFailureException" title="Permalink to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="#anfema_django_testutils.testcases.PreconditionError" title="anfema_django_testutils.testcases.PreconditionError"><code class="xref py py-class docutils literal notranslate"><span class="pre">PreconditionError</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="anfema_django_testutils.testcases.TransactionTestCase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">anfema_django_testutils.testcases.</span></span><span class="sig-name descname"><span class="pre">TransactionTestCase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#anfema_django_testutils.testcases.TransactionTestCase" title="Permalink to this definition"></a></dt>
+<dd><p>Extends the <a class="reference external" href="https://docs.djangoproject.com/en/stable/topics/testing/tools/#django.test.TransactionTestCase" title="(in Django v5.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">django.test.TransactionTestCase</span></code></a> class with a precondition failure status.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#anfema_django_testutils.testcases.SimpleTestCase" title="anfema_django_testutils.testcases.SimpleTestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">SimpleTestCase</span></code></a></p>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="anfema_django_testutils.testcases.TransactionTestCase.transactionSubTest">
+<span class="sig-name descname"><span class="pre">transactionSubTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#anfema_django_testutils.testcases.TransactionTestCase.transactionSubTest" title="Permalink to this definition"></a></dt>
+<dd><p>Like <a class="reference external" href="https://docs.python.org/3/library/unittest.html#unittest.TestCase.subTest" title="(in Python v3.12)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">unittest.TestCase.subTest()</span></code></a>, but runs  within a transaction and ensures this transaction
+is rolled back afterward.</p>
+<p>On database backends with no transaction support, <a class="reference internal" href="#anfema_django_testutils.testcases.TransactionTestCase.transactionSubTest" title="anfema_django_testutils.testcases.TransactionTestCase.transactionSubTest"><code class="xref py py-meth docutils literal notranslate"><span class="pre">transactionSubTest()</span></code></a> behaves as
+<a class="reference external" href="https://docs.python.org/3/library/unittest.html#unittest.TestCase.subTest" title="(in Python v3.12)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">unittest.TestCase.subTest()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>msg</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Optional message used in case of failure.</p></li>
+<li><p><strong>**params</strong> – Additional information or context for the subtest.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="anfema_django_testutils.testcases.TestCase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">anfema_django_testutils.testcases.</span></span><span class="sig-name descname"><span class="pre">TestCase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#anfema_django_testutils.testcases.TestCase" title="Permalink to this definition"></a></dt>
+<dd><p>Extends the <a class="reference external" href="https://docs.djangoproject.com/en/stable/topics/testing/tools/#django.test.TestCase" title="(in Django v5.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">django.test.TestCase</span></code></a> class with a precondition failure status.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#anfema_django_testutils.testcases.SimpleTestCase" title="anfema_django_testutils.testcases.SimpleTestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">SimpleTestCase</span></code></a></p>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="anfema_django_testutils.testcases.TestCase.transactionSubTest">
+<span class="sig-name descname"><span class="pre">transactionSubTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#anfema_django_testutils.testcases.TestCase.transactionSubTest" title="Permalink to this definition"></a></dt>
+<dd><p>Like <a class="reference external" href="https://docs.python.org/3/library/unittest.html#unittest.TestCase.subTest" title="(in Python v3.12)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">unittest.TestCase.subTest()</span></code></a>, but runs  within a transaction and ensures this transaction
+is rolled back afterward.</p>
+<p>On database backends with no transaction support, <a class="reference internal" href="#anfema_django_testutils.testcases.TestCase.transactionSubTest" title="anfema_django_testutils.testcases.TestCase.transactionSubTest"><code class="xref py py-meth docutils literal notranslate"><span class="pre">transactionSubTest()</span></code></a> behaves as
+<a class="reference external" href="https://docs.python.org/3/library/unittest.html#unittest.TestCase.subTest" title="(in Python v3.12)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">unittest.TestCase.subTest()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>msg</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Optional message used in case of failure.</p></li>
+<li><p><strong>**params</strong> – Additional information or context for the subtest.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-anfema_django_testutils.tags">
+<span id="anfema-django-testutils-tags"></span><h2>anfema_django_testutils.tags<a class="headerlink" href="#module-anfema_django_testutils.tags" title="Permalink to this heading"></a></h2>
+<p>This module provides test case tags related utilities.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="anfema_django_testutils.tags.TestCaseTag">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">anfema_django_testutils.tags.</span></span><span class="sig-name descname"><span class="pre">TestCaseTag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">tags</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#anfema_django_testutils.tags.TestCaseTag" title="Permalink to this definition"></a></dt>
+<dd><p>Decorator base class to create predefined test case
+<a class="reference external" href="https://docs.djangoproject.com/en/4.1/topics/testing/tools/#tagging-tests">tags</a>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.2.</span></p>
+</div>
+<p>With this class you can create re-usable test case tags for your Django project:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">CustomTestCaseTag</span><span class="p">(</span><span class="n">TestCaseTag</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A custom testcase tag&quot;&quot;&quot;</span>
+    <span class="n">tags</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;VeryImportantTest&#39;</span><span class="p">,</span> <span class="s1">&#39;VerySlowTest&#39;</span><span class="p">]</span>
+
+<span class="nd">@CustomTestCaseTag</span><span class="p">(</span><span class="s1">&#39;Tag1&#39;</span><span class="p">,</span> <span class="s1">&#39;Tag2&#39;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">CustomTestCase</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>This is pretty much the same as tagging a test class like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@tag</span><span class="p">(</span><span class="s1">&#39;CustomTestCaseTag&#39;</span><span class="p">,</span> <span class="s1">&#39;VeryImportantTest&#39;</span><span class="p">,</span> <span class="s1">&#39;VerySlowTest&#39;</span><span class="p">,</span> <span class="s1">&#39;Tag1&#39;</span><span class="p">,</span> <span class="s1">&#39;Tag2&#39;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">CustomTestCase</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+        <span class="o">...</span>
+</pre></div>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>If you have several tags to define you can generically use the <a class="reference internal" href="#anfema_django_testutils.tags.TestCaseTag" title="anfema_django_testutils.tags.TestCaseTag"><code class="xref py py-class docutils literal notranslate"><span class="pre">TestCaseTag</span></code></a> in a separate module,
+for instance:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># custom_tags.py</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;AdminTest&#39;</span><span class="p">,</span> <span class="s1">&#39;ModelTest&#39;</span><span class="p">,</span> <span class="s1">&#39;FormTest&#39;</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">anfema_django_testutils.tags</span> <span class="kn">import</span> <span class="n">TestCaseTag</span>
+
+<span class="k">for</span> <span class="n">tag_name</span> <span class="ow">in</span> <span class="n">__all__</span><span class="p">:</span>
+    <span class="nb">setattr</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="vm">__name__</span><span class="p">],</span> <span class="n">tag_name</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">tag_name</span><span class="p">,</span> <span class="p">(</span><span class="n">TestCaseTag</span><span class="p">,),</span> <span class="p">{}),)</span>
+</pre></div>
+</div>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="anfema_django_testutils.tags.TestCaseTag.tags">
+<span class="sig-name descname"><span class="pre">tags</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#anfema_django_testutils.tags.TestCaseTag.tags" title="Permalink to this definition"></a></dt>
+<dd><p>A list with predefined extra tags.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="contrib.html" class="btn btn-neutral float-left" title="Contrib" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="license.html" class="btn btn-neutral float-right" title="License" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, anfema GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>anfema-django-testutils &mdash; anfema-django-testutils 0.8.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/clipboard.min.js"></script>
+        <script src="_static/copybutton.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Configuration" href="configuration.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            anfema-django-testutils
+          </a>
+              <div class="version">
+                0.8.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contrib.html">Contrib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">anfema-django-testutils</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">anfema-django-testutils</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="toctree-wrapper compound">
+</div>
+<section id="anfema-django-testutils">
+<h1>anfema-django-testutils<a class="headerlink" href="#anfema-django-testutils" title="Permalink to this heading"></a></h1>
+<p>The main intention of the <code class="docutils literal notranslate"><span class="pre">anfema_django_testutils</span></code> app is to provide a Django test runner which considers
+snapshot tests as well as code coverage and human-readable html test reports. Moreover, the test result
+<code class="docutils literal notranslate"><span class="pre">Precondition</span> <span class="pre">Failure</span></code> has been added.</p>
+<p>This package integrates <a class="reference external" href="https://github.com/syrusakbary/snapshottest">snapshottest</a> as well as
+<a class="reference external" href="https://coverage.readthedocs.io/en/latest/">coverage</a>.</p>
+<section id="links">
+<h2>Links<a class="headerlink" href="#links" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Source available at: <a class="reference external" href="https://github.com/anfema/anfema-django-testutils">https://github.com/anfema/anfema-django-testutils</a></p></li>
+<li><p>Documentation available at: <a class="reference external" href="https://anfema.github.io/anfema-django-testutils">https://anfema.github.io/anfema-django-testutils</a></p></li>
+</ul>
+</section>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">anfema_django_testutils</span></code> is officially supported on:</p>
+<ul class="simple">
+<li><p>Python &gt;= 3.9</p></li>
+<li><p>Django &gt;= 3.2</p></li>
+</ul>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>anfema-django-testutils
+</pre></div>
+</div>
+</section>
+<section id="setting-up">
+<h2>Setting up<a class="headerlink" href="#setting-up" title="Permalink to this heading"></a></h2>
+<p>Update your Django <code class="docutils literal notranslate"><span class="pre">settings.py</span></code> to use the <code class="docutils literal notranslate"><span class="pre">anfema_django_testutils</span></code> test runner:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># settings.py</span>
+
+<span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="o">...</span>
+    <span class="s2">&quot;mathfilters&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;anfema_django_testutils&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">TEST_RUNNER</span> <span class="o">=</span> <span class="s2">&quot;anfema_django_testutils.runner.TestRunner&quot;</span>
+</pre></div>
+</div>
+<p>For further information see the <code class="docutils literal notranslate"><span class="pre">anfema_django_testutils</span></code> documentation.</p>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
+<p>For writing test cases use the <code class="docutils literal notranslate"><span class="pre">anfema_django_testutils.testcases.TestCase</span></code> rather than the <code class="docutils literal notranslate"><span class="pre">django.test.TestCase</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># app/tests.py</span>
+
+<span class="kn">from</span> <span class="nn">anfema_django_testutils.testcases</span> <span class="kn">import</span> <span class="n">TestCase</span>
+
+
+<span class="k">class</span> <span class="nc">CustomTest</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+</section>
+<section id="create-documentation">
+<h2>Create documentation<a class="headerlink" href="#create-documentation" title="Permalink to this heading"></a></h2>
+<p>To generate the <code class="docutils literal notranslate"><span class="pre">anfema_django_testutils</span></code> documentation from the local sources, run in a terminal:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>tox
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>tox<span class="w"> </span>-e<span class="w"> </span>docs<span class="w"> </span>--<span class="w"> </span>docs/build
+</pre></div>
+</div>
+</section>
+<section id="run-tests">
+<h2>Run tests<a class="headerlink" href="#run-tests" title="Permalink to this heading"></a></h2>
+<p>To execute the <code class="docutils literal notranslate"><span class="pre">anfema_django_testutils</span></code> tests, run in a terminal:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>tox
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>tox
+</pre></div>
+</div>
+</section>
+<section id="license">
+<h2>License<a class="headerlink" href="#license" title="Permalink to this heading"></a></h2>
+<p>Licensed under the MIT-clause license; see <code class="docutils literal notranslate"><span class="pre">LICENSE</span></code> for details.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="configuration.html" class="btn btn-neutral float-right" title="Configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, anfema GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
